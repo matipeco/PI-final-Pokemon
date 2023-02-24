@@ -12,6 +12,7 @@ const Card = ({ pokemon }) => {
             <article className={style.card}>
                 <img src={pokemon.image} alt="pokemon" />
                 <h2 className={style.name}>{pokemon.name}</h2>
+                <p className={style.type}>{pokemon.attack}</p>
                 <p className={style.type}>{pokemon.types.join(' - ')}</p>
             </article>
         </Link>

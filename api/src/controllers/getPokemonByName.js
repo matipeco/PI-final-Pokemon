@@ -4,7 +4,7 @@ const getAllPokemons = require('../controllers/getAllPokemon')
 
 const getPokemonByName = async (name) => {
     const allPokemon = await getAllPokemons();
-    const pokeFoundName = allPokemon.find(poke => name.toLowerCase() === poke.name.toLowerCase());
+    const pokeFoundName = allPokemon.filter(poke => name.toLowerCase() === poke.name.toLowerCase());
     if (!pokeFoundName) throw new Error(`Pokemon not found by name: ${name}.`);
 
     return pokeFoundName;

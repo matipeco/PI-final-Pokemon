@@ -51,24 +51,14 @@ const getPokemonsDb = async () => {
             }
         })
 
-        const dataDb = allPokemons.map((el) => {
-            return {
-                id: el.id,
-                name: el.name,
-                types: el.types.map((type) => type.name),
-                image: el.image,
-                life: el.life,
-                attack: el.attack,
-                defense: el.defense,
-                speed: el.speed,
-                height: el.height,
-                weight: el.weight,
-                createdDb: el.createdDb
-            }
-        })
+        const dataDb = allPokemons.map((el) => ({
+            ...poke.toJSON(),
+            types: poke.types.map((t) => t.name),
+
+        }));
 
         //Si no encuentra en la Db
-        if (!dataDb) throw new Error("The pokemon could not be found in the api")
+        if (!dataDb) throw new Error("The pokemon could not be found in the DDB")
         return dataDb;
 
     } catch (error) {
