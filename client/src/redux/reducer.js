@@ -3,6 +3,7 @@ import {
     GET_POKEMON_DETAIL,
     GET_POKEMON_BY_NAME,
     FILTER_CREATED,
+    FILTER_BY_TYPES,
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
     GET_POKEMON_TYPES,
@@ -65,6 +66,18 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: updateAllPokemons
             }
+
+        case FILTER_BY_TYPES:
+            const pokes = [...state.allPokemonsCopy];
+            const typesFilter =
+                action.payload === 'all' ? pokes
+                    : pokes.filter((elem) => elem.types.includes(action.payload));
+
+            return {
+                ...state,
+                allPokemons: typesFilter
+            }
+
 
         case FILTER_CREATED:
             //va a tener la data que deseo filtrar

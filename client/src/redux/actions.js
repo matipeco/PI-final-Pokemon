@@ -3,6 +3,7 @@ import {
     GET_ALL_POKEMONS,
     GET_POKEMON_DETAIL,
     FILTER_CREATED,
+    FILTER_BY_TYPES,
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
     GET_POKEMON_BY_NAME,
@@ -72,8 +73,18 @@ export const getPokemonTypes = () => {
 
 export const postPokemon = (payload) => {
     return async (dispatch) => {
-        const response = axios.post(`http://localhost:3001/pokemon`, payload)
-        return response;
+        try {
+            const response = await axios.post(`http://localhost:3001/pokemon`, payload)
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+export const filterByType = (payload) => {
+    return {
+        type: FILTER_BY_TYPES,
+        payload
     }
 }
 

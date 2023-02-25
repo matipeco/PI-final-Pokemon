@@ -1,16 +1,23 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import { useDispatch } from "react-redux";
-import { getAllPokemons, filterCreated, orderByName, orderByAttack } from "../../redux/actions";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPokemons, filterCreated, orderByName, orderByAttack, getPokemonTypes, filterByType } from "../../redux/actions";
+import { useState, useEffect } from "react";
 
 const Home = () => {
     //Botones/Opciones para filtrar por tipo, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
     //Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemones por orden alfabético y por ataque.
     const dispatch = useDispatch();
 
+    const types = useSelector((state) => state.types)
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const [/*render*/, setRender] = useState(``);//warning
+
+    const handleFilter = (ev) => {
+        ev.preventDefault();
+        dispatch(filterByType(ev.target.value))
+    }
 
     const handleClick = (ev) => {
         ev.preventDefault();
@@ -37,6 +44,11 @@ const Home = () => {
         setCurrentPage(1);
         setRender(`Render ${ev.target.value}`)
     }
+
+    useEffect(() => {
+        dispatch(getPokemonTypes())
+    }, [dispatch])
+
 
     return (
         <>  <button onClick={(ev) => handleClick(ev)}>Reload all my Pokemon </button>
@@ -66,10 +78,15 @@ const Home = () => {
                     </select>
                 </label>
 
-                <label>Types
-                    <select >
-                        <option value="types">Types</option>
+                <label >Type
+                    <select name="type" onChange={(ev) => handleFilter(ev)}>
+                        {
+                            types.map((type) => (
+                                <option key={type.name} value={type.name}>{type.name}</option>
+                            ))
+                        }
                     </select>
+
                 </label>
             </div>
             <CardsContainer currentPage={currentPage} setCurrentPage={setCurrentPage} />

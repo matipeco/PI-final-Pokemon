@@ -12,7 +12,7 @@ const Form = () => {
     //me creo un estado local donde me guarde la info del formulario
     //ese estado inicial va a ser un objeto con las props que necesita el POST
     const [input, setInput] = useState({
-        img: "",
+        image: "",
         name: "",
         life: "",
         attack: "",
@@ -20,7 +20,7 @@ const Form = () => {
         speed: "",
         height: "",
         weight: "",
-        type: []
+        types: []
     })
 
     //manja mis cambios en los inputs
@@ -36,7 +36,7 @@ const Form = () => {
             ...input,
             //cuando elija el type, me tre todo y concatena el target valuye
             //Va agregando en un array todo lo que va seleccionando
-            type: [...input.type, ev.target.value]
+            types: [...input.types, ev.target.value]
         })
     }
 
@@ -54,7 +54,7 @@ const Form = () => {
             speed: "",
             height: "",
             weight: "",
-            type: []
+            types: []
         })
         //useHistory, te redirige a la ruta que yo le diga
         history.push('/home')
@@ -62,12 +62,12 @@ const Form = () => {
 
     const handleDeleteType = (elem) => {
         //traigo una copya del estadoinput y lo mapeo para quedarme con los typos distintos al que me manda el evento
-        const filterDelete = input.type.filter((type) => type !== elem);
+        const filterDelete = input.types.filter((type) => type !== elem);
 
         //seteo el estado input
         setInput({
             ...input,
-            type: filterDelete
+            types: filterDelete
         })
 
     }
@@ -132,7 +132,7 @@ const Form = () => {
                 <button type="submit">CREATE</button>
                 <ul>
                     {
-                        input.type.map(elem =>
+                        input.types.map(elem =>
                             <li key={elem} >{elem}
                                 <button type="button" onClick={() => handleDeleteType(elem)}>x</button>
                             </li>
