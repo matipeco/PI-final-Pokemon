@@ -4,13 +4,17 @@ import {
     GET_POKEMON_BY_NAME,
     FILTER_CREATED,
     ORDER_BY_NAME,
-    ORDER_BY_ATTACK
+    ORDER_BY_ATTACK,
+    GET_POKEMON_TYPES,
+    POST_POKEMON,
+    DELETE_CARD
 } from "./action-types";
 
 const initialState = {
     allPokemons: [],
     allPokemonsCopy: [],
-    detail: {}
+    detail: {},
+    types: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -35,6 +39,18 @@ export const reducer = (state = initialState, action) => {
                 allPokemons: action.payload
             }
 
+        case GET_POKEMON_TYPES:
+            return {
+                ...state,
+                types: action.payload
+            }
+
+        //El post no hace absolutamente nada, necesito que me devuelva el estado como esta
+        //porque yo voy a crear el personaje en una ruta nueva
+        case POST_POKEMON:
+            return {
+                ...state
+            }
         // case FILTER_BY_TYPES:
         //     const allPokemons = state.allPokemonsCopy;
         //     const typesFiltered = action.payload ? "all"  
@@ -42,6 +58,13 @@ export const reducer = (state = initialState, action) => {
         //     return {
 
         //     }
+        case DELETE_CARD:
+            const id = action.payload;
+            const updateAllPokemons = state.allPokemons.filter((poke) => poke.id !== id)
+            return {
+                ...state,
+                allPokemons: updateAllPokemons
+            }
 
         case FILTER_CREATED:
             //va a tener la data que deseo filtrar
@@ -54,6 +77,7 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: action.payload === 'all' ? state.allPokemonsCopy : createdFilter
             }
+
         case ORDER_BY_NAME:
             const allPokemonsCopy = [...state.allPokemonsCopy];
 
@@ -106,11 +130,9 @@ export const reducer = (state = initialState, action) => {
                     }
                     return 0;
                 });
-
             return {
                 ...state,
                 allPokemons: action.payload === 'default' ? state.allPokemonsCopy : sortedAttack
-
             }
 
         default:

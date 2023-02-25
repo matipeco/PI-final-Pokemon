@@ -5,13 +5,15 @@ import {
     FILTER_CREATED,
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
-    GET_POKEMON_BY_NAME
+    GET_POKEMON_BY_NAME,
+    GET_POKEMON_TYPES,
+    DELETE_CARD
 } from './action-types';
 
 export const getAllPokemons = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get('http://localhost:3001/pokemon/');
+            const { data } = await axios.get('http://localhost:3001/pokemon');
 
             dispatch({
                 type: GET_ALL_POKEMONS,
@@ -53,6 +55,27 @@ export const getPokemonByName = (name) => {
     }
 }
 
+export const getPokemonTypes = () => {
+    return async (dispatch) => {
+        try {
+            let res = await axios.get(`http://localhost:3001/types`)
+
+            return dispatch({
+                type: GET_POKEMON_TYPES,
+                payload: res.data
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+export const postPokemon = (payload) => {
+    return async (dispatch) => {
+        const response = axios.post(`http://localhost:3001/pokemon`, payload)
+        return response;
+    }
+}
 
 // export const filterPokemonByTypes = (payload) => {
 //     return {
@@ -79,5 +102,13 @@ export const orderByAttack = (payload) => {
     return {
         type: ORDER_BY_ATTACK,
         payload
+    }
+}
+
+////NO ANDA BIEN, LOS FILTROS!
+export const deleteCard = (id) => {
+    return {
+        type: DELETE_CARD,
+        payload: id
     }
 }

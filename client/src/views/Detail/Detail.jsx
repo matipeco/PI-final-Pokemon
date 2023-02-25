@@ -12,7 +12,7 @@ export const Detail = () => {
 
     useEffect(() => {
         dispatch(getPokemonDetail(id))
-    }, [])
+    }, [dispatch, id])//warning
 
     if (!pokemon.image || !pokemon.types) return <p>Loading...</p>
 

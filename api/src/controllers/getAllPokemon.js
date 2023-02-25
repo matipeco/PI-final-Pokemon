@@ -51,7 +51,7 @@ const getPokemonsDb = async () => {
             }
         })
 
-        const dataDb = allPokemons.map((el) => ({
+        const dataDb = allPokemons.map((poke) => ({
             ...poke.toJSON(),
             types: poke.types.map((t) => t.name),
 

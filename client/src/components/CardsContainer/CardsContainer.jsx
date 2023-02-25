@@ -17,10 +17,10 @@ export const CardsContainer = (props) => {
     //cuando se monte hago tal cosa
     useEffect(() => {
         dispatch(getAllPokemons());
-    }, [])
+    }, [dispatch])//warning
 
     //creamos otro estado local para almacenar cuantos personajes quiero por pagina
-    const [charactersPerPage, setCharactersPerPage] = useState(12)
+    const [charactersPerPage, /*setCharactersPerPage*/] = useState(12)
 
     //creamos una constante donde me guardo el indice del ultimo personaje
     const indexOfLastCharacter = props.currentPage * charactersPerPage;//12
@@ -39,6 +39,7 @@ export const CardsContainer = (props) => {
         props.setCurrentPage(pageNumber);
     }
 
+    if (currentCharacters.length === 0) return <p>Loading...</p>
     return (
         <div className={style.cardContainer}>
             <SearchBar currentPage={props.currentPage} setCurrentPage={props.setCurrentPage} />

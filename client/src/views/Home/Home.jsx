@@ -10,7 +10,7 @@ const Home = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [render, setRender] = useState(``);
+    const [/*render*/, setRender] = useState(``);//warning
 
     const handleClick = (ev) => {
         ev.preventDefault();
@@ -35,7 +35,7 @@ const Home = () => {
         ev.preventDefault();
         dispatch(orderByAttack(ev.target.value))
         setCurrentPage(1);
-        setRender(`Ordered ${ev.target.value}`)
+        setRender(`Render ${ev.target.value}`)
     }
 
     return (
