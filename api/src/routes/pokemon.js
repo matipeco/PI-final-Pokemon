@@ -47,10 +47,14 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     //Me traigo de body las props que me pasen para crear el nuevo pokemon
-    const { name, life, image, attack, defense, speed, height, weight, types } = req.body;
+    let { name, life, image, attack, defense, speed, height, weight, types } = req.body;
 
-    if (!name || !image || !life || !attack || !defense) {
+    if (!name || !life || !attack || !defense || !types) {
+
         return res.status(400).send("Please complete the required information.")
+    }
+    if (!image) {
+        image = 'https://i.pinimg.com/originals/85/0b/9a/850b9adf969f4ca7b2c564ae5b6b87e3.png';
     }
 
     try {

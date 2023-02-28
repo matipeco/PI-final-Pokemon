@@ -51,25 +51,6 @@ const Home = () => {
         <>  <SearchBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
             <div className={style.container}>
                 <div className={style.containerChild}>
-                    <h3>Order By:</h3>
-                    <label>Attack
-                        <select onChange={ev => handleSortAttack(ev)}>A
-                            <option value="default">Default</option>
-                            <option value="attack-asc">Ascendant</option>
-                            <option value="attack-desc">Descendant</option>
-                        </select>
-                    </label>
-
-                    <label>Name
-                        <select onChange={ev => handleSortName(ev)} >
-                            <option value="default">Default</option>
-                            <option value="asc">A-Z</option>
-                            <option value="desc">Z-A</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div className={style.containerChild}>
                     <h3>Filter By:</h3>
                     <label>Origin
                         <select onChange={ev => handleFilterCreated(ev)} >
@@ -80,6 +61,7 @@ const Home = () => {
                     </label>
                     <label >Type
                         <select name="type" onChange={(ev) => handleFilter(ev)}>
+                            <option value="all">All</option>
                             {
                                 types.map((type) => (
                                     <option key={type.name} value={type.name}>{type.name}</option>
@@ -88,6 +70,24 @@ const Home = () => {
                         </select>
                     </label>
                 </div>
+                <div className={style.containerChild}>
+                    <h3>Order By:</h3>
+                    <label>Attack
+                        <select onChange={ev => handleSortAttack(ev)}>A
+                            <option value="default">Default</option>
+                            <option value="attack-asc">Ascendant</option>
+                            <option value="attack-desc">Descendant</option>
+                        </select>
+                    </label>
+                    <label>Name
+                        <select onChange={ev => handleSortName(ev)} >
+                            <option value="default">Default</option>
+                            <option value="asc">A-Z</option>
+                            <option value="desc">Z-A</option>
+                        </select>
+                    </label>
+                </div>
+
             </div>
             <CardsContainer currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </>

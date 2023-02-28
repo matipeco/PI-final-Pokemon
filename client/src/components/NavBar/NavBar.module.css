@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-around;
     /*Provisorio el space-around*/
-    padding: 10px 0;
+    padding: 6px 0;
     border-bottom: 3px solid black;
     margin-bottom: 20px;
 }
@@ -17,7 +17,7 @@
     display: block;
     margin: 0 auto;
     opacity: 0;
-    transition: 300ms;
+    transition: 350ms;
 }
 
 .mainContainer a:hover::after {

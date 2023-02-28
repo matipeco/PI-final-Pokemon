@@ -23,7 +23,6 @@ const SearchBar = (props) => {
     }
 
     return (
-
         <form onSubmit={handleSubmit} className={style.searchBar}>
             <input
                 type="text"

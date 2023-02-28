@@ -1,16 +1,53 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-bottom: 100px;
+}
+
 .card {
     background-color: #eee;
     border-radius: 10px;
     border: 3px solid black;
-    width: 200px;
+    width: 350px;
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    text-decoration: none;
+    align-items: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
 }
 
-.name {
-    font-weight: 400;
-    font-size: 2rem;
+.card h2 {
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 12px;
+    font-size: 37px;
+}
 
+.id {
+    margin: 25px 0 0 15px;
+
+    letter-spacing: 1.7px;
+    font-size: 25px;
+
+
+}
+
+.containerParrafos {
+    letter-spacing: 1.7px;
+    font-size: 25px;
+    column-count: 2;
+    column-gap: 10px;
+    padding: 15px 15px 25px 25px;
+    padding-left: 20px;
+    justify-content: center;
+}
+
+span {
+    font-weight: 600;
+    font-style: normal;
+}
+
+.card img {
+    width: 70%;
 }

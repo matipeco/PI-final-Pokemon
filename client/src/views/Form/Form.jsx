@@ -2,37 +2,37 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getPokemonTypes, postPokemon } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import style from './Form.module.css'
 
 const validate = (state) => {
     const error = {}
 
     if (!state.name.length || state.name.length > 15) {
-        error.name = "Name must be between 1 and 15 characters";
+        error.name = "Name must be between 1 and 15 characters!";
     }
-
     if (state.image && !/^http.+.\.(jpg|jpeg|gif|png|webp)$/.test(state.image)) {
-        error.image = "Invalid image";
+        error.image = "Invalid image!";
     }
     if (state.life < 1 || state.life > 255) {
-        error.life = "Life must be between 1 and 255";
+        error.life = "Life must be between 1 and 255!";
     }
     if (state.attack < 1 || state.attack > 255) {
-        error.attack = "Attack must be between 1 and 255";
+        error.attack = "Attack must be between 1 and 255!";
     }
     if (state.defense < 1 || state.defense > 255) {
-        error.defense = "Defense must be between 1 and 255";
+        error.defense = "Defense must be between 1 and 255!";
     }
     if (state.speed < 0 || state.speed > 255) {
-        error.speed = "Speed must be between 0 and 255";
+        error.speed = "Speed must be between 0 and 255!";
     }
     if (state.weight < 0 || state.weight > 255) {
-        error.weight = "Weight must be between 0 and 255";
+        error.weight = "Weight must be between 0 and 255!";
     }
     if (state.height < 0 || state.height > 255) {
-        error.height = "Height must be between 0 and 255";
+        error.height = "Height must be between 0 and 255!";
     }
     if (state.types.length > 2 || state.types.length < 1) {
-        error.types = "You must choose one or two types";
+        error.types = "You must choose one or two types!";
     }
 
     return error;
@@ -128,10 +128,10 @@ const Form = () => {
 
     return (
 
-        <div>
-            <h2>CREATE YOUR POKEMON!</h2>
+        <div className={style.container}>
 
-            <form onSubmit={(ev) => handleSubmit(ev)}>
+            <form onSubmit={(ev) => handleSubmit(ev)} className={style.form}>
+                <h2>CREATE YOUR POKEMON!</h2>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" required value={input.name} name="name" onChange={handleChange} onBlur={handleBlur} />
@@ -176,25 +176,26 @@ const Form = () => {
                 </div>
                 <label >Type
                     <select name="types" onChange={handleSelect} disabled={input.types.length >= 2} onBlur={handleBlur}>
+                        <option value="all">All</option>
                         {
                             types.map((type) => (
                                 <option key={type.name} value={type.name}>{type.name}</option>
                             ))
                         }
                     </select>
-                    {errors.types && touch.types && <p>{errors.types}</p>}
+                    {errors.types && touch.types && <p className={style.errorType}>{errors.types}</p>}
 
                 </label>
                 {/* me hace una lista, toma del estado donde tomo los types, y me los va renderizando */}
-                <button type="submit" disabled={!isFormValid}>CREATE</button>
                 <ul>
                     {
                         input.types.map(elem =>
-                            <li key={elem} >{elem}
-                                <button type="button" onClick={() => handleDeleteType(elem)}>x</button>
+                            <li key={elem} className={style.listaTypes}>{elem}
+                                <button className={style.delete} type="button" onClick={() => handleDeleteType(elem)}>x</button>
                             </li>
                         )}
                 </ul>
+                <button className={style.create} type="submit" disabled={!isFormValid}>CREATE</button>
             </form>
 
         </div>
