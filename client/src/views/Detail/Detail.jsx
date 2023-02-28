@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from './Detail.module.css'
 import { useEffect } from 'react';
 import { getPokemonDetail } from "../../redux/actions";
+import Loading from "../../components/Loading/Loading";
 
 export const Detail = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export const Detail = () => {
         dispatch(getPokemonDetail(id))
     }, [dispatch, id])//warning
 
-    if (!pokemon.image || !pokemon.types) return <p>Loading...</p>
+    if (!pokemon.image || !pokemon.types) return <Loading />
 
     return (
         <>
@@ -35,4 +36,3 @@ export const Detail = () => {
 }
 
 export default Detail;
-//<p>Type:{pokemon?types?join(' - ')}</p>

@@ -7,12 +7,13 @@ import { useEffect, useState } from 'react';
 import { getAllPokemons } from "../../redux/actions";
 import style from './CardsContainer.module.css'
 import Paginado from "../Paginado/Paginado";
-import SearchBar from "../SearchBar/SearchBar";
+import Loading from "../Loading/Loading";
 
-export const CardsContainer = (props) => {
+const CardsContainer = (props) => {
     //ejecuto acciones del reducer
     const dispatch = useDispatch();
-    const pokemons = useSelector((state) => state.allPokemons);
+    const { allPokemons, filteredPokemons } = useSelector((state) => state);
+    const pokemons = filteredPokemons.length ? filteredPokemons : allPokemons
 
     //cuando se monte hago tal cosa
     useEffect(() => {
@@ -37,23 +38,23 @@ export const CardsContainer = (props) => {
     //y seteo la pagina en ese numero de pagina
     const paginado = (pageNumber) => {
         props.setCurrentPage(pageNumber);
+
     }
 
-    if (currentCharacters.length === 0) return <p>Loading...</p>
+    if (pokemons.length === 0) return <Loading />
+
     return (
-        <div className={style.cardContainer}>
-            <SearchBar currentPage={props.currentPage} setCurrentPage={props.setCurrentPage} />
-            {
-                currentCharacters?.map((poke) => (
+        <>
+            <div className={style.cardContainer}>
+                {currentCharacters?.map((poke) => (
                     <Card key={poke.id} pokemon={poke} />
-                ))
-            }
+                ))}
+            </div>
             <Paginado
                 charactersPerPage={charactersPerPage}
                 pokemons={pokemons.length}
-                paginado={paginado}
-            />
-        </div>
+                paginado={paginado} />
+        </>
     )
 }
 

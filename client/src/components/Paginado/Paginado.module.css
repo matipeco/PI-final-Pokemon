@@ -1,0 +1,17 @@
+.list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+}
+
+.list li {
+    margin: 0 8px;
+}
+
+.list button {
+    padding: 0 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}

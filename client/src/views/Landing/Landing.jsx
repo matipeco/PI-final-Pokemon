@@ -7,7 +7,9 @@ const Landing = () => {
     return (
         <div className={style.background}>
 
-            <Link to='/home'><img className={style.pokebola} src={pokebola} alt="pokebola" /></Link>
+            <Link to='/home'> ENTER
+                <img className={style.pokebola} src={pokebola} alt="pokebola" />
+            </Link>
         </div>
     )
 }

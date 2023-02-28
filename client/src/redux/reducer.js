@@ -6,26 +6,25 @@ import {
     FILTER_BY_TYPES,
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
-    GET_POKEMON_TYPES,
-    POST_POKEMON,
-    DELETE_CARD
+    GET_POKEMON_TYPES
 } from "./action-types";
 
 const initialState = {
     allPokemons: [],
-    allPokemonsCopy: [],
+    filteredPokemons: [],
     detail: {},
     types: []
 }
 
 export const reducer = (state = initialState, action) => {
 
+    const pokemonsToOrder = [...(state.filteredPokemons.length ? state.filteredPokemons : state.allPokemons)];
+
     switch (action.type) {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
                 allPokemons: action.payload,
-                allPokemonsCopy: action.payload
             }
 
         case GET_POKEMON_DETAIL:
@@ -46,107 +45,72 @@ export const reducer = (state = initialState, action) => {
                 types: action.payload
             }
 
-        //El post no hace absolutamente nada, necesito que me devuelva el estado como esta
-        //porque yo voy a crear el personaje en una ruta nueva
-        case POST_POKEMON:
-            return {
-                ...state
-            }
-        // case FILTER_BY_TYPES:
-        //     const allPokemons = state.allPokemonsCopy;
-        //     const typesFiltered = action.payload ? "all"  
-
-        //     return {
-
-        //     }
-        case DELETE_CARD:
-            const id = action.payload;
-            const updateAllPokemons = state.allPokemons.filter((poke) => poke.id !== id)
-            return {
-                ...state,
-                allPokemons: updateAllPokemons
-            }
-
         case FILTER_BY_TYPES:
-            const pokes = [...state.allPokemonsCopy];
-            const typesFilter =
-                action.payload === 'all' ? pokes
-                    : pokes.filter((elem) => elem.types.includes(action.payload));
+            if (action.payload === 'all') {
+                return {
+                    ...state,
+                    filteredPokemons: state.allPokemons
+                }
+            }
 
             return {
                 ...state,
-                allPokemons: typesFilter
+                filteredPokemons: state.allPokemons.filter((poke) => poke.types.includes(action.payload))
             }
-
 
         case FILTER_CREATED:
-            //va a tener la data que deseo filtrar
-            const pokemons = state.allPokemonsCopy;
-            const createdFilter = action.payload === 'created'
-                ? pokemons.filter(el => el.createdDb)
-                : pokemons.filter(el => !el.createdDb);
+            if (action.payload === 'all') {
+                return {
+                    ...state,
+                    filteredPokemons: state.allPokemons
+                }
+            }
 
             return {
                 ...state,
-                allPokemons: action.payload === 'all' ? state.allPokemonsCopy : createdFilter
+                filteredPokemons: state.allPokemons.filter(poke => (
+                    action.payload === 'created' ? poke.createdDb : !poke.createdDb
+                ))
             }
 
-        case ORDER_BY_NAME:
-            const allPokemonsCopy = [...state.allPokemonsCopy];
+        case ORDER_BY_NAME: {
 
-            let sortedArr = action.payload === 'asc'
-                //el sort compara dos valores... y lo va poniendo a la derecha o a la izquerda, si son iguales los deja igual.
-                ? allPokemonsCopy.sort(function (a, b) {
-                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                        return 1;
-                    }
-                    if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                        return -1;
-                    }
-                    return 0;
-                }) :
-                allPokemonsCopy.sort(function (a, b) {
-                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                        return -1;
-                    }
-                    if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                        return 1;
-                    }
-                    return 0;
-                });
+            if (action.payload === "default") {
+                return {
+                    ...state,
+                    filteredPokemons: pokemonsToOrder.sort((a, b) => a.id - b.id)
+                }
+            }
 
             return {
                 ...state,
-                allPokemons: action.payload === 'default' ? state.allPokemonsCopy : sortedArr
+                filteredPokemons: pokemonsToOrder.sort((a, b) => (
+                    action.payload === 'asc'
+                        ? a.name.localeCompare(b.name)
+                        : b.name.localeCompare(a.name)
+                ))
             }
 
-        case ORDER_BY_ATTACK:
-            const allPokemonsCopyAttack = [...state.allPokemonsCopy];
+        }
 
-            let sortedAttack = action.payload === 'attack-asc'
-                //el sort compara dos valores... y lo va poniendo a la derecha o a la izquerda, si son iguales los deja igual.
-                ? allPokemonsCopyAttack.sort(function (a, b) {
-                    if (a.attack > b.attack) {
-                        return 1;
-                    }
-                    if (b.attack > a.attack) {
-                        return -1;
-                    }
-                    return 0;
-                }) :
-                allPokemonsCopyAttack.sort(function (a, b) {
-                    if (a.attack > b.attack) {
-                        return -1;
-                    }
-                    if (b.attack > a.attack) {
-                        return 1;
-                    }
-                    return 0;
-                });
+        case ORDER_BY_ATTACK: {
+
+            if (action.payload === "default") {
+                return {
+                    ...state,
+                    filteredPokemons: pokemonsToOrder.sort((a, b) => a.id - b.id)
+                }
+            }
+
             return {
                 ...state,
-                allPokemons: action.payload === 'default' ? state.allPokemonsCopy : sortedAttack
+                filteredPokemons: pokemonsToOrder.sort((a, b) => (
+                    action.payload === 'attack-asc'
+                        ? a.attack - b.attack
+                        : b.attack - a.attack
+                ))
             }
+        }
 
         default:
             return state;

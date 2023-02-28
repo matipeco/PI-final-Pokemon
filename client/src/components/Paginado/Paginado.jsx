@@ -1,5 +1,7 @@
 import React from "react";
 
+import style from './Paginado.module.css'
+
 //Declaro mi paginado y me traigo las props del otro componente
 export default function Paginado({ charactersPerPage, pokemons, paginado }) {
     //numero de pagina
@@ -12,15 +14,15 @@ export default function Paginado({ charactersPerPage, pokemons, paginado }) {
     }
     //Este componente va a renderizar los numeritos en sí
     return (
-        <nav>
-            <ul>
-                {pageNumbers &&
-                    pageNumbers.map(number => (
-                        <li key={number}>
-                            <button onClick={() => paginado(number)}>{number}</button>
-                        </li>
-                    ))}
-            </ul>
-        </nav>
+
+        <ul className={style.list}>
+            {pageNumbers &&
+                pageNumbers.map(number => (
+                    <li key={number}>
+                        <button onClick={() => paginado(number)}>{number}</button>
+                    </li>
+                ))}
+        </ul>
+
     )
 }

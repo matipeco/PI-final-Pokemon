@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+.containerChild h3 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.containerChild select {
+    margin-left: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}

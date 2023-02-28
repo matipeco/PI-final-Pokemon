@@ -7,8 +7,7 @@ import {
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
     GET_POKEMON_BY_NAME,
-    GET_POKEMON_TYPES,
-    DELETE_CARD
+    GET_POKEMON_TYPES
 } from './action-types';
 
 export const getAllPokemons = () => {
@@ -51,7 +50,8 @@ export const getPokemonByName = (name) => {
                 payload: res.data
             })
         } catch (error) {
-            console.error(error.message)
+
+            alert(error.response.data)
         }
     }
 }
@@ -88,13 +88,6 @@ export const filterByType = (payload) => {
     }
 }
 
-// export const filterPokemonByTypes = (payload) => {
-//     return {
-//         type: FILTER_BY_TYPES,
-//         payload
-//     }
-// }
-
 export const filterCreated = (payload) => {
     return {
         type: FILTER_CREATED,
@@ -116,10 +109,3 @@ export const orderByAttack = (payload) => {
     }
 }
 
-////NO ANDA BIEN, LOS FILTROS!
-export const deleteCard = (id) => {
-    return {
-        type: DELETE_CARD,
-        payload: id
-    }
-}
