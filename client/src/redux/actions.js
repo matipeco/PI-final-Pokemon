@@ -8,7 +8,7 @@ import {
     ORDER_BY_ATTACK,
     GET_POKEMON_BY_NAME,
     GET_POKEMON_TYPES,
-    CLEAR_POKEMONS_FILTERS
+    CLEAR_POKEMONS_FILTERS,
 } from './action-types';
 
 export const getAllPokemons = () => {

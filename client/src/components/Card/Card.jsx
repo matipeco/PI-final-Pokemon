@@ -16,7 +16,6 @@ const Card = ({ pokemon }) => {
                 </article>
             </Link>
         </div>
-
     )
 }
 

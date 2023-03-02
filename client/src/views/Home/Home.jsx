@@ -6,22 +6,18 @@ import {
     orderByAttack,
     getPokemonTypes,
     filterByType,
-    getAllPokemons,
-    clearPokemonsFilters
+    getAllPokemons
 } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from './Home.module.css'
 
 const Home = () => {
-    //Botones/Opciones para filtrar por tipo, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
-    //Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemones por orden alfabético y por ataque.
     const dispatch = useDispatch();
 
     const types = useSelector((state) => state.types)
 
     const [currentPage, setCurrentPage] = useState(1);
-
 
     const handleFilter = (ev) => {
         dispatch(filterByType(ev.target.value))
@@ -35,7 +31,6 @@ const Home = () => {
 
     const handleSortName = (ev) => {
         dispatch(orderByName(ev.target.value));
-        //setCurrentPage lo coloco para que cuando haga el ordenamiento me setee la pagina en la primera
         setCurrentPage(1);
     }
 
@@ -51,7 +46,6 @@ const Home = () => {
     useEffect(() => {
         dispatch(getPokemonTypes())
     }, [dispatch])
-
 
     return (
         <>  <SearchBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
