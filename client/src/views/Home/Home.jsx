@@ -5,7 +5,9 @@ import {
     orderByName,
     orderByAttack,
     getPokemonTypes,
-    filterByType
+    filterByType,
+    getAllPokemons,
+    clearPokemonsFilters
 } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -42,6 +44,10 @@ const Home = () => {
         setCurrentPage(1);
     }
 
+    const handleReload = () => {
+        dispatch(getAllPokemons())
+    }
+
     useEffect(() => {
         dispatch(getPokemonTypes())
     }, [dispatch])
@@ -49,6 +55,9 @@ const Home = () => {
 
     return (
         <>  <SearchBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <div className={style.botonContainer}>
+                <button onClick={handleReload} className={style.boton}>¡Reload!</button>
+            </div>
             <div className={style.container}>
                 <div className={style.containerChild}>
                     <h3>Filter By:</h3>

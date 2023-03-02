@@ -20,8 +20,19 @@
     border-radius: 5px;
 }
 
+.botonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.boton {
+    display: flex;
+    padding: 4px 10px;
+}
+
 button {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1.5s ease-in-out;
     border: 2px solid black;
     border-radius: 5px;
 }

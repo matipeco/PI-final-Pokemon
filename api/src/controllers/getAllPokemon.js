@@ -28,10 +28,8 @@ const getPokemonsApi = async () => {
             })
         )
 
-        if (!allPokemons) throw new Error("The pokemon could not be found in the api");
-        //Si el poke no es encontrado..
-
         return allPokemons;
+
     } catch (error) {
         return error.message;
     }
@@ -50,14 +48,13 @@ const getPokemonsDb = async () => {
                 }
             }
         })
-
         const dataDb = allPokemons.map((poke) => ({
             ...poke.toJSON(),
             types: poke.types.map((t) => t.name),
-
         }));
 
-        //Si no encuentra en la Db
+
+        //??????
         if (!dataDb) throw new Error("The pokemon could not be found in the DDB")
         return dataDb;
 
@@ -74,6 +71,7 @@ const getAllPokemons = async () => {
         //Juntamos ambos arrays en uno
         const allPokemons = [...dataApi, ...dataDb];
 
+        //??????
         if (!allPokemons.length) throw Error("No pokemons found");
         return allPokemons;
 

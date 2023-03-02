@@ -6,7 +6,8 @@ import {
     FILTER_BY_TYPES,
     ORDER_BY_NAME,
     ORDER_BY_ATTACK,
-    GET_POKEMON_TYPES
+    GET_POKEMON_TYPES,
+    CLEAR_POKEMONS_FILTERS
 } from "./action-types";
 
 const initialState = {
@@ -25,6 +26,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: action.payload,
+                filteredPokemons: []
             }
 
         case GET_POKEMON_DETAIL:
@@ -111,6 +113,12 @@ export const reducer = (state = initialState, action) => {
                 ))
             }
         }
+
+        case CLEAR_POKEMONS_FILTERS:
+            return {
+                ...state,
+                filteredPokemons: [],
+            }
 
         default:
             return state;

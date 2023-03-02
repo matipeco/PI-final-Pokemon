@@ -34,7 +34,6 @@ const validate = (state) => {
     if (state.types.length > 2 || state.types.length < 1) {
         error.types = "You must choose one or two types!";
     }
-
     return error;
 }
 
@@ -63,7 +62,6 @@ const Form = () => {
     const [touch, setTouch] = useState({});
 
     const errors = validate(input);
-    console.log(errors)
 
     const isFormValid = Object.keys(errors).length === 0;
     //manja mis cambios en los inputs
@@ -76,7 +74,6 @@ const Form = () => {
             [name]: convertToNumber ? Number(value) : value
         })
     }
-    console.log(input)
 
     const handleSelect = (ev) => {
         if (!input.types.includes(ev.target.value)) {
@@ -110,7 +107,6 @@ const Form = () => {
             ...input,
             types: filterDelete
         })
-
     }
 
     const handleBlur = (ev) => {

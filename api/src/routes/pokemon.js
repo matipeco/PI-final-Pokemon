@@ -7,18 +7,14 @@ const { Pokemon, Type } = require('../db');
 
 const router = Router();
 
-//GET con o sin name 2x1 XD
 router.get('/', async (req, res) => {
     try {
-        //me traigo el name que me pasan por query;
         const { name } = req.query;
         let infoPoke;
 
-        //si me llega el name por query, ejecuto el controlador y me guardo la respuesta en la variable creada.
         if (name) {
             infoPoke = await getPokemonByName(name);
         } else {
-            //Si no me llega un name, me guardo todos los pokes en la variable
             infoPoke = await getAllPokemon();
         }
 

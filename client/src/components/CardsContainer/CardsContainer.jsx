@@ -4,7 +4,7 @@
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getAllPokemons } from "../../redux/actions";
+import { clearPokemonsFilters, getAllPokemons } from "../../redux/actions";
 import style from './CardsContainer.module.css'
 import Paginado from "../Paginado/Paginado";
 import Loading from "../Loading/Loading";
@@ -13,11 +13,12 @@ const CardsContainer = (props) => {
     //ejecuto acciones del reducer
     const dispatch = useDispatch();
     const { allPokemons, filteredPokemons } = useSelector((state) => state);
-    const pokemons = filteredPokemons.length ? filteredPokemons : allPokemons
+    const pokemons = filteredPokemons.length ? filteredPokemons : allPokemons;
 
     //cuando se monte hago tal cosa
     useEffect(() => {
         dispatch(getAllPokemons());
+        return () => dispatch(clearPokemonsFilters())
     }, [dispatch])//warning
 
     //creamos otro estado local para almacenar cuantos personajes quiero por pagina
