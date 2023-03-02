@@ -38,9 +38,7 @@ const getPokemonsApi = async () => {
 const getPokemonsDb = async () => {
     try {
         const allPokemons = await Pokemon.findAll({
-            //que me traiga todos los pokes incluida la relacion con el type
             include: {
-                //Aca el modelo solo con atributo name
                 model: Type,
                 attributes: ["name"],
                 through: {
@@ -54,7 +52,6 @@ const getPokemonsDb = async () => {
         }));
 
 
-        //??????
         if (!dataDb) throw new Error("The pokemon could not be found in the DDB")
         return dataDb;
 
@@ -63,15 +60,12 @@ const getPokemonsDb = async () => {
     }
 }
 
-//Fusionamos los get de Api y la Db para tener todos los resultados en un solo array
+//Junto los get de Api y la Db para tener todos los resultados en un solo array
 const getAllPokemons = async () => {
     try {
         const dataApi = await getPokemonsApi();
         const dataDb = await getPokemonsDb();
-        //Juntamos ambos arrays en uno
         const allPokemons = [...dataApi, ...dataDb];
-
-        //??????
         if (!allPokemons.length) throw Error("No pokemons found");
         return allPokemons;
 
