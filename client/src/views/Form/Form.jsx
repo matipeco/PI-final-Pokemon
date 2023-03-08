@@ -123,9 +123,7 @@ const Form = () => {
     }, [dispatch])
 
     return (
-
         <div className={style.container}>
-
             <form onSubmit={(ev) => handleSubmit(ev)} className={style.form}>
                 <h2>CREATE YOUR POKEMON!</h2>
                 <div>

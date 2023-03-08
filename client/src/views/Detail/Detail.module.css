@@ -26,11 +26,8 @@
 
 .id {
     margin: 25px 0 0 15px;
-
     letter-spacing: 1.7px;
     font-size: 25px;
-
-
 }
 
 .containerParrafos {
@@ -50,4 +47,22 @@ span {
 
 .card img {
     width: 70%;
+}
+
+@media (max-width: 800px) {
+    .card {
+        background-color: #eee;
+        border-radius: 10px;
+        border: 3px solid black;
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    .containerParrafos {
+        font-size: 22px;
+    }
+
 }

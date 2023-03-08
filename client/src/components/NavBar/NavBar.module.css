@@ -26,5 +26,36 @@
 
 .active {
     font-weight: 600;
+}
 
+@media (max-width: 800px) {
+    .active {
+        font-weight: 600;
+    }
+
+    .mainContainer {
+        font-size: 25px;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        border-bottom: 3px solid black;
+        margin-bottom: 20px;
+    }
+
+    .mainContainer a::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        background-color: black;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+        opacity: 0;
+        transition: 350ms;
+    }
+
+    .mainContainer a:hover::after {
+        opacity: 1;
+    }
 }

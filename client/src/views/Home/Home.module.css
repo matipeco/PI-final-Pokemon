@@ -41,3 +41,35 @@ button:hover {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
     transform: translateX(-0.2px);
 }
+
+@media (max-width: 800px) {
+    .container {
+        margin-left: 10px;
+    }
+
+    select {
+        width: 60px;
+        height: 30px;
+
+    }
+
+    .containerChild h3 {
+        font-size: 25px;
+    }
+
+    .container label {
+        font-size: 23px;
+    }
+
+    button {
+        width: 80px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .boton {
+        padding: 4px 6px;
+        text-align: center;
+    }
+
+}

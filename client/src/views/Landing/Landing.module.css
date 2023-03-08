@@ -23,3 +23,10 @@
 .background a:hover {
     letter-spacing: 4px;
 }
+
+@media (max-width: 800px) {
+    .background {
+        width: 750px;
+        height: 900px;
+    }
+}
