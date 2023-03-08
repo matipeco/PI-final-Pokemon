@@ -26,7 +26,13 @@
 
 @media (max-width: 800px) {
     .background {
-        width: 750px;
-        height: 900px;
+        background-image: url('./images/background-landing.jpg');
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 50px;
+        background-size: 190% 100%;
     }
 }
